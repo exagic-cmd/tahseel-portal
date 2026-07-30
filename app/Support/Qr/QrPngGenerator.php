@@ -17,21 +17,16 @@ use SimpleSoftwareIO\QrCode\ImageMerge;
 /**
  * Renders a QR code PNG (optionally with a logo merged into the center)
  * without depending on the imagick PHP extension.
- *
- * SimpleSoftwareIO\QrCode\Generator hardcodes BaconQrCode's
- * ImagickImageBackEnd for the "png" format, which requires imagick. This
- * renders the same square/black-on-white style using GdImageBackEnd instead,
- * then reuses the package's GD-based ImageMerge to overlay the logo.
  */
 final class QrPngGenerator
 {
     public static function generate(
         string $text,
-        int $size = 100,
-        int $margin = 0,
-        string $errorCorrection = 'L',
+        int $size = 135,
+        int $margin = 1,
+        string $errorCorrection = 'M',
         ?string $logoPath = null,
-        float $logoPercentage = 0.2
+        float $logoPercentage = 0.18
     ): string {
         $renderer = new ImageRenderer(
             new RendererStyle(
@@ -45,13 +40,17 @@ final class QrPngGenerator
         );
 
         $ecLevel = strtoupper($errorCorrection);
+        if (!in_array($ecLevel, ['L', 'M', 'Q', 'H'])) {
+            $ecLevel = 'M';
+        }
+
         $png = (new Writer($renderer))->writeString(
             $text,
             Encoder::DEFAULT_BYTE_MODE_ECODING,
             ErrorCorrectionLevel::$ecLevel()
         );
 
-        if (null === $logoPath) {
+        if (null === $logoPath || !file_exists($logoPath)) {
             return $png;
         }
 

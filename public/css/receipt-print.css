@@ -23,8 +23,8 @@
     position: absolute;
     top: 225px;
     left: 65px;
-    right: 65px;
-    bottom: 45px;
+    right: 100px;
+    bottom: 0px;
     background-image: url('../receipt-bg-pattern.png');
     background-repeat: repeat;
     background-size: 70px 70px;
@@ -269,9 +269,9 @@
     }
 
     .tahseel-receipt {
-        width: 95% !important;
+        width: 94% !important;
         margin: 0 !important;
-        padding: 5mm 25mm;
+        padding: 5mm 28mm;
         box-shadow: none;
         margin: 1px auto !important;
         text-align: center !important;
