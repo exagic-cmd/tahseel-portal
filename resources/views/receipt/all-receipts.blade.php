@@ -77,11 +77,11 @@
                 <td>{{ $receipt->user_name }}</td>
              
                     <td class="project-actions text-right">
-                          <a class="btn btn-primary btn-sm" href="{{ $receipt->id }}">
+                          <!-- <a class="btn btn-primary btn-sm" href="{{ $receipt->id }}">
                               <i class="fas fa-folder">
                               </i>
                               View
-                          </a>
+                          </a> -->
                           <a class="btn btn-info btn-sm" href="{{ route('receipt.edit', $receipt->id) }}">
                               <i class="fas fa-pencil-alt">
                               </i>

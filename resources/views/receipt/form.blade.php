@@ -7,16 +7,9 @@
     background: gray;
     color: white;
     }
-    #printableArea {
-            /* padding: 20px;
-            border: 1px solid #000;
-            width: 80%;
-            margin: 20px auto;
-            background: #f8f8f8; */
-        }
-        
 </style>
 <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/receipt-print.css') }}">
 @stop
 
 @section('content')
@@ -52,70 +45,151 @@
                   <div class="card-header"><div class="card-title">Receipt View</div></div>
                   <!--end::Header-->
                   <div class="card-body">
-                  <div class="ticket receipt-view" id="printableArea">
-        <img class="barcode hidden" id="barcode1" src="{{ asset('barcode.png') }}" alt="barcode">
-            <img class="logo" src="{{ asset('logo.png') }}" alt="Logo">
-            <p class="centered" style="margin-top: 10px;margin-bottom:3px; font-weight: 500"><b>حكومة الشارقة</b>
-                <br>ه‍ينة ا لطرق و المواصلات دالرة ا لما لية المركزية
-                <br>  نظام التعرفة المرورية للشاحنات   &nbsp;&nbsp;&nbsp;  نظا م تحصيل
-                </p>
-                <p style="margin-top: 0;text-align: right;padding-right:52px;height:2px" id="titleTop">
-                </p>
-                <p class="centered" style="height: 0px;font-family: auto;">(Payment Receipt)</p>
-                <p class="centered" style="height: 3px; font-family: auto;">Tax Invoice / فاتورة قضريبية
-                </p>
-                <p class="centered" style="height: 3px;font-family: auto;">TRN: <span id="trn"></span></p>
-            <table>
-                <tbody>
-                <tr>
-                        <td class="description" style="direction:rtl" id="tim"></td>
-                        <td class="description"style="width: 1px;">:الوقت</td>
-                        <td class="description" style="width: 114px;" >&nbsp;&nbsp;&nbsp;:التاريخ<span style="font-size:13px;padding-right: 5px;" id="dte"></span></td>
-                    </tr>
-                    <tr>
-                        <td class="description" colspan="3" >رقم الايصال:&nbsp;&nbsp;<span id="amt"></span></td>
-           
-                    </tr>
-                    <tr>
-                        <td class="description" colspan="3"><span>نوع لخدمة:&nbsp;&nbsp;&nbsp;&nbsp;</span>رسوم عبور شاحنة مع مقطورة</td>
-                   
-                    </tr>
-                    <tr>
-                        <td class="description" colspan="3">&nbsp;&nbsp;اسم المالك :&nbsp;<span id="vName"></span>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td class="description" colspan="3" ><span id="vNo"style="display: inline-block;"></span>&nbsp;&nbsp;&nbsp;&nbsp;:رقم المركبة</td>
-                    </tr>
-                    <tr>
-                        <td class="description"  colspan="2"><span class="pdL33">درهم&nbsp;&nbsp;<span id="tAmt" style="display: inline-block;"></span></span></td>
-                        <td class="description" colspan="1"><span></span>:اجمالى المبلغ </td>
-                    </tr>
-                    <tr>
-                        <td class="quantity" colspan="1">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td class="description" colspan="2">رسوم اخرى</td>
-                    </tr>
-                    <tr>
-                         <td class="quantity" colspan="1">درهم&nbsp;&nbsp;<span id="temAmt" style="display: inline-block;"></span></td>
-                        <td class="description" colspan="2"><p style="font-size:12px; margin:0">:دعم الا بحات العلمية فى امارة الشارقة</p></td>
-                    </tr>
-                    <tr>
-                         <td class="quantity" colspan="1">درهم&nbsp;&nbsp;<span id="charAmt" style="display: inline-block;"></span></td>
-                        <td class="description" colspan="2">:رسوم خدمت تحصيل</td>
-                    </tr>
-                    <tr>
-                         <td class="quantity"colspan="1">درهم&nbsp;&nbsp;<span id="lstAmt" style="display: inline-block;"></span></td>
-                        <td class="description" colspan="2">:رسوم طرمية النيمة المضا فة</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="centered" style="height: 3px;font-family: auto;"> Gate<span id="gNo"></span>:اسم لستخدم</p>
-            <p class="centered" style="height: 3px; font-size: 12px"> ملاحظه:   ير جى لا حنفاظ يايصال تحصيل ندواعى امية</p>
-             <!-- <img class="barcode" style="height:auto; width:130px"  src="{{ asset('qr-n-1.png') }}" alt="barcode"> -->
-             <div id="receiptDisplay" class="ticket hidden"></div>
-             <button id="btnPrint" class="hidden-print btn btn-default" onclick="printDiv('printableArea')">Print</button>
-             
-              <!-- <button id="btnPrintBar" class="hidden-print" onclick="myFunction()">Print with barcode</button> -->
-        </div>
+                  <div class="tahseel-receipt" id="printableArea">
+                    <div class="header-barcode">
+                        <img id="barcode1" src="{{ asset('barcode-print.png') }}" alt="barcode">
+                    </div>
+
+                    <div class="header-logos">
+                        <div class="gov-logo-box">
+                            <img src="{{ asset('government-logo.png') }}" alt="Government Logo">
+                        </div>
+                        <div class="tahseel-logo-box">
+                            <img src="{{ asset('tahseel-logo.png') }}" alt="Tahseel Logo">
+                        </div>
+                    </div>
+
+                    <div class="titles-flex-container">
+                        <div class="header-text-side header-text-left">
+                            <p>حكومة الشارقة</p>
+                            <p>هيئة الطرق والمواصلات</p>
+                            <p>نظام التعرفة المرورية للشاحنات</p>
+                        </div>
+                        <div class="titles-section">
+                            &nbsp;
+                        </div>
+                        <div class="header-text-side header-text-right">
+                            <p>حكومة الشارقة</p>
+                            <p>دائرة المالية المركزية</p>
+                            <p>نظام الدفع الرقمي تحصيل</p>
+                        </div>
+                    </div>
+                    <div class="titles-flex-container">
+                        <div class="header-text-side header-text-left">
+                            &nbsp;
+                        </div>
+                        <div class="titles-section">
+                            <p class="tax-invoice-title-arb">فاتورة ضريبية</p>
+                            <p class="tax-invoice-title-eng">Tax Invoice</p>
+                            <p class="trn-text">TRN <span id="trn"></span></p>
+                        </div>
+                        <div class="header-text-side header-text-right">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="title-separator"></div>
+
+                    <table class="data-table">
+                        <tbody>
+                            <tr class="time-date-row">
+                                <td colspan="3">
+                                    <div class="time-date-container">
+                                        <div style="width: 45%; display: flex; justify-content: space-between;">
+                                            <span class="col-eng">Time</span>
+                                            <span class="col-val" id="tim"></span>
+                                            <span class="col-arb">الوقت</span>
+                                        </div>
+                                        <div style="width: 45%; display: flex; justify-content: space-between;">
+                                            <span class="col-eng">Date</span>
+                                            <span class="col-val" id="dte"></span>
+                                            <span class="col-arb">التاريخ</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-eng">Receipt number</td>
+                                <td class="col-val" id="rcptNo"></td>
+                                <td class="col-arb">رقم الإيصال</td>
+                            </tr>
+                            <tr>
+                                <td class="col-eng">Amount</td>
+                                <td class="col-val" id="tAmt"></td>
+                                <td class="col-arb">المبلغ</td>
+                            </tr>
+                            <tr>
+                                <td class="col-eng">Owner Name</td>
+                                <td class="col-val" id="vName"></td>
+                                <td class="col-arb">إسم المالك</td>
+                            </tr>
+                            <tr>
+                                <td class="col-eng">Service</td>
+                                <td class="col-val">رسوم عبور شاحنة مع مقطورة</td>
+                                <td class="col-arb">نوع الخدمة</td>
+                            </tr>
+                            <tr>
+                                <td class="col-eng">Vehicle Number</td>
+                                <td class="col-val" id="vNo"></td>
+                                <td class="col-arb">رقم المركبة</td>
+                            </tr>
+                            <tr>
+                                <td class="col-eng">User Name</td>
+                                <td class="col-val" id="gNo"></td>
+                                <td class="col-arb">إسم المستخدم</td>
+                            </tr>
+                            <tr>
+                                <td class="col-eng">Voucher Number</td>
+                                <td class="col-val" id="voucherNo"></td>
+                                <td class="col-arb">رقم الإيصال الإلكتروني</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="qrCode" id="receiptDisplay"></div>
+
+                    <div class="footer-section print-only">
+                        <div class="footer-meta">
+                            <span id="footer_timestamp"></span>
+                            <span id="footer_username"></span>
+                        </div>
+                        <div class="footer-row">
+                            <table class="legal-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="footer-col-eng">This receipt has been printed based on the data entered in digital payment system Tahseel.</td>
+                                        <td class="footer-col-arb">تمت طباعة هذا الإيصال اعتماداً على البيانات<br> المدخلة بنظام الدفع الرقمي تحصيل.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="footer-col-eng">Photocopied or unsigned and unsealed receipts are not considered valid.</td>
+                                        <td class="footer-col-arb">لا يعتد بالإيصالات المنسوخة أو غير الموقعة<br> والمختومة.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="footer-col-eng">Any erasure or alteration in this document invalidates it.</td>
+                                        <td class="footer-col-arb">كل كشط أو تغيير في هذه الوثيقة يلغيها.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="footer-col-eng">Please verify receipt details by scanning QR code.</td>
+                                        <td class="footer-col-arb">يرجى مطابقة بيانات الإيصال عن طريق مسح <br>رمز الاستجابة السريعة.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="footer-col-eng">Please make sure after you scan QR code that the browser address is<br> tahseel.gov.ae</td>
+                                        <td class="footer-col-arb">يرجى التأكد بعد مسح رمز الاستجابة السريعة<br> أن عنوان المتصفح هو tahseel.gov.ae</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="footer-col-eng">To review the approved fees, please refer to Executive Council Decision No. 10 for the year 2022.</td>
+                                        <td class="footer-col-arb">لمراجعة الرسوم المعتمدة يرجى مراجعة<br> قرار المجلس التنفيذي رقم 10 لسنة 2022.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="footer-col-eng">Please keep the receipt for auditing purposes.</td>
+                                        <td class="footer-col-arb">يرجى الاحتفاظ بالإيصال لدواعي التدقيق.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <button id="btnPrint" class="hidden-print btn btn-default" onclick="printDiv('printableArea')">Print</button>
+                </div>
                 </div>
                 </div>
                 <!--end::Quick Example-->
@@ -154,6 +228,8 @@
                                 <input type="text" name="time" id="text4" value="16:01" class="field-long" /></li>
                             <li><label>:رقم الايصال</label>
                                 <input value="3406191220210976" type="text" name="receipt_number" id="textTWO" class="field-long" /></li>
+                            <li><label>رقم الإيصال الإلكتروني</label>
+                                <input value="7346438296276560" type="text" name="voucher_number" id="textVoucher" class="field-long" /></li>
                             <li><label>:اسم المالك</label>
                                 <input value="اسم المالك" type="text" name="owner_name" id="text55" class="field-long" /></li>
                             <li><label>:رقم المركبة</label>
@@ -208,18 +284,22 @@
         let formData = $(this).serialize(); // Get form data
 
                 // Update Receipt Preview Immediately
-                $('#titleTop').text($('#titleT').val());
+                let rawDate = $('#text3').val();
+                let formattedDate = rawDate ? rawDate.split("-").reverse().join("/") : "";
+                let timeVal = $('#text4').val();
+                let userName = $('#text10').val();
+
                 $('#trn').text($('#textone').val());
-                $('#dte').text($('#text3').val());
-                $('#tim').text($('#text4').val());
-                $('#amt').text($('#textTWO').val());
+                $('#dte').text(formattedDate);
+                $('#tim').text(timeVal);
+                $('#rcptNo').text($('#textTWO').val());
+                $('#voucherNo').text($('#textVoucher').val());
                 $('#vName').text($('#text55').val());
                 $('#vNo').text($('#text5').val());
                 $('#tAmt').text($('#text6').val());
-                $('#temAmt').text($('#text7').val());
-                $('#charAmt').text($('#text8').val());
-                $('#lstAmt').text($('#text9').val());
-                $('#gNo').text($('#text10').val());
+                $('#gNo').text(userName);
+                $('#footer_timestamp').text(formattedDate + ' ' + timeVal);
+                $('#footer_username').text(userName);
         $.ajax({
             url: "{{ route('receipt.save') }}",
             method: "POST",
@@ -239,7 +319,7 @@
     </script>
     <script>
         function printDiv(divId) {
-            var printContent = document.getElementById(divId).innerHTML;
+            var printContent = document.getElementById(divId).outerHTML;
             var originalContent = document.body.innerHTML;
 
             document.body.innerHTML = printContent;

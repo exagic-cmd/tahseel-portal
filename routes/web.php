@@ -36,7 +36,6 @@ Route::get('receipt/all-receipts', [ReceiptController::class, 'allReceipts'])->n
 
 // Dynamic route should be at the end to avoid conflicts
 Route::get('/receipt/{id}', [ReceiptController::class, 'showReceipt'])->name('receipt.show');
-//Route::get('/scan/{id}', [ReceiptController::class, 'receiptDetail'])->name('receipt.receipt-detail');
 
 Route::delete('/receipt/{id}', [ReceiptController::class, 'deleteReceipt'])->name('receipt.delete');
 
@@ -46,7 +45,9 @@ Route::put('/receipt/{id}', [ReceiptController::class, 'updateReceipt'])->name('
 
 require __DIR__.'/auth.php';
 Route::get('/file/{id}', [ReceiptController::class, 'receiptPDF'])->name('receipt.pdf-receipt');
-Route::get('/scan/{id}', [ReceiptController::class, 'receiptDetail'])->name('receipt.receipt-detail');
+Route::get('/CustomerPortal/{id}', [ReceiptController::class, 'receiptDetail'])
+    ->where('id', '[A-Za-z0-9\-_]+')
+    ->name('receipt.receipt-detail');
 Route::get('/receipt/{id}/pdf', 'ReceiptController@generatePDF')->name('receipt.pdf');
 // Route::get('/partials/pdf-receipt/{id}', [ReceiptController::class, 'receiptDetail']);
 

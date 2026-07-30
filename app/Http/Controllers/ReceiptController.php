@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Artisan;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use SimpleSoftwareIO\QrCode\Generator;
 use App\Support\Qr\QrPngGenerator;
+use App\Support\UrlIdCoder;
 
 
 class ReceiptController extends Controller
@@ -41,6 +42,7 @@ class ReceiptController extends Controller
             'date' => 'required|date',
             'time' => 'required',
             'receipt_number' => 'required|string',
+            'voucher_number' => 'nullable|string',
             'owner_name' => 'required|string',
             'vehicle_number' => 'required|string',
             'total_amount' => 'required|string',
@@ -55,16 +57,16 @@ class ReceiptController extends Controller
 
         // Save the receipt
         $receipt = Receipt::create($request->all());
-        $receiptUrl = url('/scan/' . $receipt->id); // Generate QR Code URL
+        $receiptUrl = route('receipt.receipt-detail', ['id' => UrlIdCoder::encode($receipt->id)]); // Generate QR Code URL
         $data['qrimage'] = 'data:image/png;base64,' . base64_encode(
             QrPngGenerator::generate($receiptUrl, 135, 0, 'H', public_path('qr-logo.png'), 0.3)
         );
-        
+
         return response()->json([
             'receipt' => view('receipt.partials.receipt', compact('receipt', 'data'))->render(),
         ]);
-        
-        // $receiptUrl = url('/scan/' . $receipt->id);// Same page with query param
+
+        // $receiptUrl = route('receipt.receipt-detail', ['id' => UrlIdCoder::encode($receipt->id)]);// Same page with query param
         // $qrCode = QrCode::size(135)->generate($receiptUrl);
         //  return response()->json([
         //     'receipt' => view('receipt.partials.receipt', compact('receipt', 'qrCode'))->render(),
@@ -73,15 +75,21 @@ class ReceiptController extends Controller
     public function showReceipt($id)
     {
         $receipt = Receipt::findOrFail($id);
-        $qrCode = QrCode::size(135)->generate(url('/scan/' . $receipt->id)); // Generate QR Code
+        $qrCode = QrCode::size(135)->generate(route('receipt.receipt-detail', ['id' => UrlIdCoder::encode($receipt->id)])); // Generate QR Code
 
         return view('receipt.show', compact('receipt', 'qrCode'));
     }
 
     public function receiptDetail($id)
     {
-        $receipt = Receipt::findOrFail($id);
-        $qrCode = url('/scan/' . $receipt->id); // Generate QR Code
+        $decryptedId = UrlIdCoder::decode($id);
+
+        if ($decryptedId === null) {
+            abort(404);
+        }
+
+        $receipt = Receipt::findOrFail($decryptedId);
+        $qrCode = route('receipt.receipt-detail', ['id' => $id]); // Generate QR Code
         $data['qrimage'] = 'data:image/png;base64,' . base64_encode(
             QrPngGenerator::generate($qrCode, 135, 0, 'H', public_path('qr-logo.png'), 0.3)
         );
@@ -92,7 +100,7 @@ class ReceiptController extends Controller
     public function receiptPDF($id)
     {
         $receipt = Receipt::findOrFail($id);
-        $qrCode = url('/scan/' . $receipt->id); // Generate QR Code
+        $qrCode = route('receipt.receipt-detail', ['id' => UrlIdCoder::encode($receipt->id)]); // Generate QR Code
 
 
 

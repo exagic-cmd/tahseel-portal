@@ -166,8 +166,8 @@ select{
 #dte{
 	    display: flex;
     flex-flow: row-reverse;
-    margin-top: -13px;
-    margin-right: 35px;
+    /* margin-top: -13px;
+    margin-right: 35px; */
 }
 @page {
     margin: 14px !important;
