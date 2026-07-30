@@ -6,7 +6,7 @@
     <title>Tahseel Digital Payment System</title>
 	<link rel="icon" type="image/x-icon" href="{{asset('favicon.png')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Poppins:wght@300;400;600&display=swap">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -85,80 +85,121 @@
 
 <div id="receipt-content">
 	<div class="pdf-receipt">
-	<div class="copy">
-    <h3>Copy</h3>
-    <p>{{$receipt->date}}</p>
-    <p>{{$receipt->time}}</p>
-</div>
+        <div class="ticket show card-body" dir="rtl" lang="ar">
+            <!-- Top Logo -->
+            <div class="text-center mb-2">
+                <img class="receipt-logo" src="{{ asset('tahseel-logo.png') }}" alt="Tahseel Logo" style="width: 150px; height: auto; display: block; margin: 0 auto;">
+            </div>
+            
+            <hr class="receipt-divider">
 
-    <div class="ticket  show card-body">
-        
-                      <img class="logo" src="{{ asset('logo.png') }}" alt="Logo">
-                      <hr>
-                      <p class="centered" style="margin-top: 10px;margin-bottom:3px; font-weight: 600">حكومة الشارقة
-                          <br>ه‍ينة ا لطرق و المواصلات دالرة ا لما لية المركزية
-                          <br>  نظام التعرفة المرورية للشاحنات   &nbsp;&nbsp;&nbsp;  نظا م تحصيل
-                      </p>
-                      <p style="margin-top: 0;text-align: right;padding-right:52px;height:2px" id="titleTop">
-                          {{ $receipt->gate }}
-                      </p>
-                      <hr>
-                      <p class="centered" style="height: 0px;font-family: auto;">(Payment Receipt)</p>
-                      <p class="centered" style="height: 3px; font-family: auto;">Tax Invoice / فاتورة قضريبية
-                      </p>
-                      <p class="centered" style="height: 3px; font-family: auto;">TRN: <span id="trn">{{ $receipt->trn }}</span></p>
-                      <table>
-                          <tbody>
-                              <tr>
-                                  <td class="description" style="direction:rtl" id="tim">{{ $receipt->time }}</td>
-                                  <td class="description"style="width: 1px;">:الوقت</td>
-                                  <td class="description" style="width: 114px;" >&nbsp;&nbsp;&nbsp;:التاريخ<span style="font-size:13px;padding-right: 5px;" id="dte">{{ $receipt->date }}</span></td>
-                              </tr>
-                              <tr>
-                                  <td class="description" colspan="3" >رقم الايصال:&nbsp;&nbsp;<span id="amt">{{ $receipt->receipt_number }}</span></td>
-                              </tr>
-                              <tr>
-                                  <td class="description" colspan="3"><span>نوع لخدمة:&nbsp;&nbsp;&nbsp;&nbsp;</span>رسوم عبور شاحنة مع مقطورة</td>
-                              </tr>
-                              <tr>
-                                  <td class="description" colspan="3">&nbsp;&nbsp;اسم المالك :&nbsp;<span id="vName">{{ $receipt->owner_name }}</span>&nbsp;</td>
-                              </tr>
-                              <tr>
-                                  <td class="description" colspan="3" ><span id="vNo"style="display: inline-block;">{{ $receipt->vehicle_number }}</span>&nbsp;&nbsp;&nbsp;&nbsp;:رقم المركبة</td>
-                              </tr>
-                              <tr>
-                                  <td class="description"  colspan="2"><span class="pdL33">درهم&nbsp;&nbsp;<span id="tAmt" style="display: inline-block;"> {{ $receipt->total_amount }}</span></span></td>
-                                  <td class="description" colspan="1"><span></span>:اجمالى المبلغ </td>
-                              </tr>
-                              <tr>
-                                  <td class="quantity" colspan="1">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                  <td class="description" colspan="2">رسوم اخرى</td>
-                              </tr>
-                              <tr>
-                                  <td class="quantity" colspan="1">درهم&nbsp;&nbsp;<span id="temAmt" style="display: inline-block;">{{ $receipt->research_support }}</span></td>
-                                  <td class="description" colspan="4"><p style="font-size:12px; margin:0">:دعم الا بحات العلمية فى امارة الشارقة</p></td>
-                              </tr>
-                              <tr>
-                                  <td class="quantity" colspan="1">درهم&nbsp;&nbsp;<span id="charAmt" style="display: inline-block;">{{ $receipt->collection_fee }}</span></td>
-                                  <td class="description" colspan="4">:رسوم خدمت تحصيل</td>
-                              </tr>
-                              <tr>
-                                  <td class="quantity"colspan="1">درهم&nbsp;&nbsp;<span id="lstAmt" style="display: inline-block;">{{ $receipt->vat }}</span></td>
-                                  <td class="description" colspan="4">:رسوم طرمية النيمة المضا فة</td>
-                              </tr>
-                          </tbody>
-                      </table>
-                      <p class="centered" style="height: 3px;font-family: auto;"> Gate<span id="gNo">{{ $receipt->user_name }}</span>:اسم لستخدم</p>
-                      <p class="centered" style="height: 3px; font-size: 12px"> ملاحظه:   ير جى لا حنفاظ يايصال تحصيل ندواعى امية</p>
-                      <div class="qrCode">
-						@if(!empty($data['qrimage']))
-							<img src="{{ $data['qrimage'] }}" alt="QR Code">
-						@endif
-						</div>
-						</div>
-	
+            <!-- Header Text Section (Centered RTL) -->
+            <div class="header-section text-center">
+                <div class="gov-title">حكومة الشارقة</div>
+                <div class="dept-row">
+                    <span>هيئة الطرق والمواصلات</span>
+                    <span>دائرة المالية المركزية</span>                    
+                </div>
+                <div class="dept-row">
+                    <span>نظام التعرفة المرورية للشاحنات</span>
+                    <span>نظام الدفع الرقمي تحصيل</span>
+                </div>
+                <div class="gate-title">{{ $receipt->gate }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            </div>
+
+            <hr class="receipt-divider">
+
+            <!-- Sub-Header -->
+            <div class="subheader-section text-center">
+                <div class="payment-title">(Payment Receipt)</div>
+                <div class="tax-title">فاتورة ضريبية / Tax Invoice</div>
+                <div class="trn-title">TRN: <span id="trn">{{ $receipt->trn }}</span></div>
+            </div>
+
+            <!-- Details Section -->
+            <div class="details-section">
+                <!-- Date & Time Row -->
+                <div class="detail-row flex-between">
+                    <div>التاريخ : <span id="dte">{{ $receipt->date }}</span></div>
+                    <div>الوقت: <span id="tim">{{ $receipt->time }}</span></div>
+                </div>
+
+                <!-- Receipt Number -->
+                <div class="detail-row">
+                    رقم الإيصال : <span id="amt" class="fw-bold">{{ $receipt->receipt_number }}</span>
+                </div>
+
+                <!-- Service Type -->
+                <div class="detail-row">
+                    نوع الخدمة : <span>{{ $receipt->service_type ?? 'رسوم عبور شاحنة مع مقطورة نقدي' }}</span>
+                </div>
+
+                <!-- Owner Name -->
+                <div class="detail-row">
+                    اسم المالـك : <span id="vName">{{ $receipt->owner_name }}</span>
+                </div>
+
+                <!-- Vehicle Number & Country -->
+                <div class="detail-row flex-between">
+                    <div>رقم المركبة : <span id="vNo">{{ $receipt->vehicle_number }}</span></div>
+                    @if(!empty($receipt->country))
+                        <div class="country-name">{{ $receipt->country }}</div>
+                    @elseif(!empty($receipt->vehicle_country))
+                        <div class="country-name">{{ $receipt->vehicle_country }}</div>
+                    @endif
+                </div>
+
+                <!-- Total Amount -->
+                <div class="detail-row flex-between">
+                    <div>إجمالي المبلغ : <span id="tAmt">{{ $receipt->total_amount }}</span></div>
+                    <div>درهم</div>
+                </div>
+
+                <!-- Other Fees Header -->
+                <div class="detail-row section-subtitle fw-bold mt-2">
+                    رسوم أخرى :
+                </div>
+
+                <!-- Research Fee -->
+                <div class="detail-row flex-between sub-fee">
+                    <div>دعم الأبحاث العلمية في إمارة الشارقة</div>
+                    <div><span id="temAmt">{{ $receipt->research_support }}</span> درهم</div>
+                </div>
+
+                <!-- Collection Fee -->
+                <div class="detail-row flex-between sub-fee">
+                    <div>رسم خدمة تحصيل</div>
+                    <div><span id="charAmt">{{ $receipt->collection_fee }}</span> درهم</div>
+                </div>
+
+                <!-- VAT Fee -->
+                <div class="detail-row flex-between sub-fee">
+                    <div>رسم ضريبة القيمة المضافة</div>
+                    <div><span id="lstAmt">{{ $receipt->vat }}</span> درهم</div>
+                </div>
+
+                <!-- User / Operator -->
+                <div class="detail-row mt-2">
+                    اسم المستخدم : <span id="gNo">{{ $receipt->user_name }}</span>
+                </div>
+
+                <!-- Note -->
+                <div class="detail-row note-text text-center mt-3">
+                    <span class="fw-bold">ملاحظة :</span> يرجى الإحتفاظ بإيصال تحصيل لدواعي أمنية
+                </div>
+            </div>
+
+            <!-- QR Code -->
+            <div class="qrCode text-center mt-3">
+                @if(!empty($data['qrimage']))
+                    <img src="{{ $data['qrimage'] }}" alt="QR Code" style="width: 140px; height: 140px; display: block; margin: 0 auto;">
+                @elseif(!empty($qrCode))
+                    {!! $qrCode !!}
+                @endif
+            </div>
+        </div>
 	</div>
-	</div>
+</div>
 	<iframe id="pdfViewer" width="100%" height="600px"></iframe>
    <div class="text-center">
     <button class="btn btn-primary text-center" onclick="openPDF()">Download Receipt <i class="fa-solid fa-print print-icon"></i></button>
@@ -232,29 +273,41 @@
 	<script>
    async function generatePDF() {
         document.getElementById('loading').style.display = 'block';
-        // document.getElementById('fullpage-preloader').style.display = 'flex';
         const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
+        const doc = new jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: 'a4'
+        });
         doc.setProperties({
-        title: 'Tahseel Receipt'
-    });
-        // Temporarily show the receipt content for capturing
+            title: 'Tahseel Receipt'
+        });
+
+        // Temporarily render receipt content for capturing
         const receiptContent = document.getElementById("receipt-content");
-        receiptContent.style.position = 'absolute';
+        const ticketElem = receiptContent.querySelector(".ticket") || receiptContent;
+        
+        receiptContent.style.position = 'fixed';
         receiptContent.style.left = '0';
         receiptContent.style.top = '0';
         receiptContent.style.visibility = 'visible';
+        receiptContent.style.zIndex = '-9999';
 
-        await html2canvas(receiptContent, { 
-            scale: 2,
-            logging: true,
-            useCORS: true
+        await html2canvas(ticketElem, { 
+            scale: 3,
+            logging: false,
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: '#ffffff'
         }).then((canvas) => {
             const imgData = canvas.toDataURL("image/png");
-            const imgWidth = 190;
+            const pdfWidth = doc.internal.pageSize.getWidth();
+            const imgWidth = 95; // Left-aligned 360px receipt width on PDF
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            const xPos = 10; // Left aligned
+            const yPos = 10;
 
-            doc.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+            doc.addImage(imgData, "PNG", xPos, yPos, imgWidth, imgHeight);
             const pdfBlob = doc.output("blob");
             const pdfUrl = URL.createObjectURL(pdfBlob);
             
@@ -271,7 +324,13 @@
     }
 
     window.onload = function() {
-        generatePDF();
+        if (document.fonts) {
+            document.fonts.ready.then(function() {
+                generatePDF();
+            });
+        } else {
+            setTimeout(generatePDF, 500);
+        }
     };
 </script>
 

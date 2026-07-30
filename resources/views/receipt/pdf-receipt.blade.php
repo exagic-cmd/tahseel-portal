@@ -32,11 +32,11 @@
     </style>
     </head>
     <body>
-        <div class="copy">
+        <!-- <div class="copy">
     <h3>Copy</h3>
     <p>{{$receipt->date}}</p>
     <p>{{$receipt->time}}</p>
-</div>
+</div> -->
     <div class="ticket  show card-body">
         
                       <img class="barcode hidden" id="barcode1" src="{{ asset('barcode.png') }}" alt="barcode">

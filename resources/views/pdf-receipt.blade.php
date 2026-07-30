@@ -8,15 +8,15 @@
         <title>Receipt</title>
     </head>
     <body>
-        <div class="copy">
+        <!-- <div class="copy">
     <h3>Copy</h3>
     <p>{{$receipt->date}}</p>
     <p>{{$receipt->time}}</p>
-</div>
+</div> -->
     <div class="ticket pdf-w show card-body">
         
                       <img class="barcode hidden" id="barcode1" src="{{ asset('barcode.png') }}" alt="barcode">
-                      <img class="logo" src="{{ asset('logo.png') }}" alt="Logo">
+                      <img class="logo" src="{{ asset('tahseel-logo.png') }}" alt="Logo">
                       <p class="centered" style="margin-top: 10px;margin-bottom:3px; font-weight: 600">حكومة الشارقة
                           <br>ه‍ينة ا لطرق و المواصلات دالرة ا لما لية المركزية
                           <br>  نظام التعرفة المرورية للشاحنات   &nbsp;&nbsp;&nbsp;  نظا م تحصيل

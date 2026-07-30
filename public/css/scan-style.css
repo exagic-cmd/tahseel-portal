@@ -1,47 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-.ticket{
-    width: 40%;
-    text-align: center;
+
+.ticket {
+    font-family: 'Cairo', 'Traditional Arabic', 'Segoe UI', Tahoma, sans-serif !important;
+    direction: rtl !important;
+    text-align: right;
+    width: 360px;
+    max-width: 100%;
+    margin: 0;
+    background: #ffffff;
+    padding: 18px 20px;
+    box-sizing: border-box;
+    color: #000000;
+    line-height: 1.6;
+    border-radius: 4px;
 }
-table{
+
+table {
     display: flex;
     justify-content: flex-end;
 }
- /* Add this to your existing styles */
+
 #receipt-content {
-position: absolute;
-left: -9999px;
-top: -9999px;
-width: 210mm; /* Standard A4 width */
-height: 297mm; /* Standard A4 height */
-visibility: hidden;
-z-index: -30000;
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    width: 360px;
+    visibility: hidden;
+    z-index: -30000;
+    background: #ffffff;
+}
+
+.receipt-divider {
+    border: 0;
+    border-top: 1px solid #000000;
+    margin: 10px 0;
+    opacity: 1;
+}
+
+.header-section .gov-title {
+    font-weight: 700;
+    font-size: 17px;
+    text-align: center;
+    color: #000;
+    margin-bottom: 4px;
+}
+
+.header-section .dept-row {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 13.5px;
+    color: #000;
+    margin-bottom: 2px;
+}
+
+.header-section .gate-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-left: 100px;
+    color: #000;
+    margin-top: 4px;
+}
+
+.subheader-section .payment-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: #000;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.subheader-section .tax-title {
+    font-size: 13.5px;
+    font-weight: 400;
+    color: #000;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.subheader-section .trn-title {
+    font-size: 13.5px;
+    font-weight: 400;
+    color: #000;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.details-section .detail-row {
+    font-size: 13.5px;
+    font-weight: 400;
+    color: #000000;
+    margin-bottom: 4px;
+    line-height: 1.5;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.details-section .note-text {
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.fw-bold {
+    font-weight: 700 !important;
 }
 
 /* Make sure the PDF viewer is visible */
 #pdfViewer {
-display: block;
-margin-top: 20px;
+    display: block;
+    margin-top: 20px;
 }
+
 body {
-    background-color:#f4f4f4;
+    background-color: #f4f4f4;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.logo img{
+
+.logo img {
     height: 80px;
 }
-.print-icon{
+
+.print-icon {
     color: white !important;
     font-size: 16px !important;
     margin-left: 8px !important;
 }
+
 .hero {
     background: url("../slider.png") no-repeat center center/cover;
     width: 100%;
@@ -50,21 +149,25 @@ body {
     left: 0;
     --bs-gutter-x: 0;
 }
-.copy{
+
+.copy {
     height: 2px;
     line-height: 1px;
 }
-.ticket .logo{
+
+.ticket .logo {
     height: 84px;
     width: 121px;
 }
-h1{
+
+h1 {
     color: #fff;
     font-size: calc(17.22222px + .92593vw);
     font-weight: 400;
     text-transform: uppercase;
 }
-h5{
+
+h5 {
     font-size: 12px;
     font-weight: 400;
     text-transform: capitalize;
@@ -74,15 +177,20 @@ h5{
     opacity: .6 !important;
     padding-bottom: 50px;
 }
+
 .text-muted {
     color: #b5b5c3 !important;
 }
+
 .font-weight-bolder {
     font-weight: 600 !important;
 }
-.mb-3, .my-3 {
+
+.mb-3,
+.my-3 {
     margin-bottom: .75rem !important;
-    }
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -90,49 +198,60 @@ h5{
     padding: 37px 0 80px 0;
     color: white;
 }
+
 .logo {
     font-size: 24px;
     font-weight: bold;
 }
-.payment{
+
+.payment {
     background-color: white;
     padding: 15px;
     margin-top: 4%;
     margin-bottom: 7%;
 }
-.payment h2{
+
+.payment h2 {
     font-weight: 600;
 }
+
 .nav-links {
     display: flex;
     list-style: none;
 }
+
 .nav-links li {
     margin: 0 15px;
 }
+
 .nav-links a {
     text-decoration: none;
     color: white;
     font-size: 14px;
 }
-ul{
+
+ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
     font-weight: 500;
 }
-.text-warning{
-    color:#ff923f !important;
+
+.text-warning {
+    color: #ff923f !important;
 }
-.font-size-h6{
+
+.font-size-h6 {
     font-size: 0.88rem !important;
     font-weight: 600;
 }
+
 .menu-icon {
     display: none;
     font-size: 24px;
     cursor: pointer;
 }
+
 .mobile-menu {
     display: none;
     position: fixed;
@@ -143,12 +262,14 @@ ul{
     background: #ffffff;
     flex-direction: column;
 }
+
 .mobile-menu a {
     color: white;
     font-size: 24px;
     text-decoration: none;
     margin: 15px 0;
 }
+
 .close-menu {
     position: absolute;
     top: 20px;
@@ -157,27 +278,33 @@ ul{
     cursor: pointer;
     color: #530f0f;
 }
-.mobile-nav{
+
+.mobile-nav {
     display: none;
 }
-.payment .btn{
+
+.payment .btn {
     margin-top: 2%;
     margin-bottom: 3%;
     text-transform: uppercase;
     font-weight: 600;
 }
+
 @media (max-width: 768px) {
     .nav-links {
         display: none;
     }
+
     .menu-icon {
         display: block;
     }
-    .menu-icon img{
+
+    .menu-icon img {
         width: 190px;
         margin-top: 30px;
         margin-bottom: 2.3rem;
     }
+
     .navbar {
         position: fixed;
         bottom: 0;
@@ -187,6 +314,7 @@ ul{
         padding: 15px;
         display: none;
     }
+
     .mobile-nav {
         position: fixed;
         bottom: 0;
@@ -198,10 +326,12 @@ ul{
         display: block;
         box-shadow: 1px 1px 17px 2px #bfbbbb;
     }
-    .j-content{
+
+    .j-content {
         justify-content: space-around;
     }
-    .mobile-nav img{
+
+    .mobile-nav img {
         height: 54px;
         box-shadow: 1px 1px 4px 1px #d1d1d1;
         border-radius: 50%;
@@ -211,10 +341,12 @@ ul{
         background: white;
         margin: 1px auto;
     }
+
     .payment {
         margin-bottom: 29%;
     }
-    .fa-solid{
+
+    .fa-solid {
         color: #9d9b9b;
         font-size: 22px;
     }
@@ -237,7 +369,8 @@ ul{
 
 /* Rotating Logo */
 #preloader-logo {
-    width: 100px; /* Adjust the size of your logo */
+    width: 100px;
+    /* Adjust the size of your logo */
     height: auto;
     animation: rotate 1.5s linear infinite;
 }
@@ -247,12 +380,13 @@ ul{
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
 }
 
-.tabs { 
+.tabs {
     display: flex;
     cursor: pointer;
     background: #f3f6f9;
@@ -260,35 +394,43 @@ ul{
     justify-content: space-around;
 
 }
-        .tab { 
-            padding: 10px 20px;
-            margin-right: 5px;
-         }
-        .tab.active { 
-            border-bottom: 6px solid #007bff;
-         }
-        .tab-content {
-            display: none;
-            padding: 24px;
-            border-top: 3px solid #ccc;
-            margin-top: -3px;
-            padding: 28px 35px 0px 35px;
-         }
-        .tab-content.active { display: block; }
 
-.tabs-p li{
+.tab {
+    padding: 10px 20px;
+    margin-right: 5px;
+}
+
+.tab.active {
+    border-bottom: 6px solid #007bff;
+}
+
+.tab-content {
+    display: none;
+    padding: 24px;
+    border-top: 3px solid #ccc;
+    margin-top: -3px;
+    padding: 28px 35px 0px 35px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tabs-p li {
     font-weight: 500;
     color: #a3a3a3;
     line-height: 3;
     border-bottom: 1px solid;
     font-size: 16px;
 }
-.circle img{
+
+.circle img {
     height: 90px;
     border-radius: 50%;
     border: 3px solid #c5c5c5;
 }
-h6{
+
+h6 {
     font-weight: 600;
     color: #bdbbbb;
     margin-bottom: 30px;
